@@ -44,7 +44,7 @@ class KylinMaster(Script):
         import params
         env.set_params(params)
         self.configure(env)
-        Execute(format(". {tmp_dir}/kylin_env.rc;su -u hdfs '{install_dir}/latest/bin/kylin.sh start'"))
+        Execute(format(". {tmp_dir}/kylin_env.rc;su hdfs '{install_dir}/latest/bin/kylin.sh start'"))
         sleep(5)
         Execute("ps -ef | grep java | grep kylin | grep -v grep | awk '{print $2}' >"+format("{install_dir}/latest/pid"))
         Execute(format("rm -rf /var/run/kylin.pid;cp {install_dir}/latest/pid /var/run/kylin.pid"))
@@ -56,7 +56,7 @@ class KylinMaster(Script):
         import params
         env.set_params(params)
         self.configure(env)
-        Execute(format(". {tmp_dir}/kylin_env.rc;su -u hdfs '{install_dir}/latest/bin/kylin.sh stop'"))
+        Execute(format(". {tmp_dir}/kylin_env.rc;su hdfs '{install_dir}/latest/bin/kylin.sh stop'"))
 
 
     def restart(self, env):
