@@ -16,10 +16,10 @@ class KylinQuery(Script):
         Execute('cd ' + params.install_dir + '; wget --no-check-certificate ' + params.downloadlocation + ' -O kylin.tar.gz  ')
         Execute('cd ' + params.install_dir + '; wget --no-check-certificate https://repo1.maven.org/maven2/com/google/guava/guava/28.0-jre/guava-28.0-jre.jar -O guava-28.0-jre.jar ')
 	
-        Execute('cd ' + params.install_dir + '; tar -xvf kylin.tar.gz')
+        Execute('cd ' + params.install_dir + ';tar -xvf kylin.tar.gz')
         Execute('cd ' + params.install_dir + ';rm -rf latest; ln -s apache-kylin* latest')
         Execute('cd ' + params.install_dir + ';chown hdfs:hadoop -R apache-kylin* ')
-	    Execute('cd ' + params.install_dir + '; cp guava-28.0-jre.jar tomcat/lib/guava-28.0-jre.jar;cp guava-28.0-jre.jar tool/guava-28.0-jre.jar )
+	Execute('cd ' + params.install_dir + ';cp guava-28.0-jre.jar tomcat/lib/guava-28.0-jre.jar;cp guava-28.0-jre.jar tool/guava-28.0-jre.jar' )
 	             
 
     def configure(self, env):  
