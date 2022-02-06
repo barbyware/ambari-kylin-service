@@ -13,7 +13,7 @@ class KylinQuery(Script):
               cd_access='a',
               create_parents=True
         )
-        Execute('cd ' + params.install_dir + '; wget ' + params.downloadlocation + ' -O kylin.tar.gz  ')
+        Execute('cd ' + params.install_dir + '; wget --no-check-certificate ' + params.downloadlocation + ' -O kylin.tar.gz  ')
         Execute('cd ' + params.install_dir + '; tar -xvf kylin.tar.gz')
         Execute('cd ' + params.install_dir + ';rm -rf latest; ln -s apache-kylin* latest')
                 
