@@ -14,5 +14,12 @@ service ambari restart
 \#non sandbox  
 sudo service ambari-server restart
 
+## Kylin install notes
+
+https://kylin.apache.org/docs31/install/index.html
+
+You can try download guava-28.0-jre.jar, put it into $KYLIN_HOME/tool/ and $KYLIN_HOME/tomcat/lib/ and restart kylin bin/kylin.sh restart.
+
+
 ## SUMMARY
 ![Image](../master/screenshots/kylin.png?raw=true)
