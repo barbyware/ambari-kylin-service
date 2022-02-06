@@ -16,6 +16,7 @@ class KylinMaster(Script):
         Execute('cd ' + params.install_dir + '; wget --no-check-certificate ' + params.downloadlocation + ' -O kylin.tar.gz  ')
         Execute('cd ' + params.install_dir + '; tar -xvf kylin.tar.gz')
         Execute('cd ' + params.install_dir + ';rm -rf latest; ln -s apache-kylin* latest')
+	Execute('cd ' + params.install_dir + ';chown hdfs:hadoop -R apache-kylin* ')
         
         #mkdir
         Execute('sudo -uhdfs hadoop fs -mkdir -p /kylin')
@@ -43,7 +44,7 @@ class KylinMaster(Script):
         import params
         env.set_params(params)
         self.configure(env)
-        Execute(format("sudo -u hdfs '. {tmp_dir}/kylin_env.rc;{install_dir}/latest/bin/kylin.sh start'"))
+        Execute(format(". {tmp_dir}/kylin_env.rc;sudo -u hdfs '{install_dir}/latest/bin/kylin.sh start'"))
         sleep(5)
         Execute("ps -ef | grep java | grep kylin | grep -v grep | awk '{print $2}' >"+format("{install_dir}/latest/pid"))
         Execute(format("rm -rf /var/run/kylin.pid;cp {install_dir}/latest/pid /var/run/kylin.pid"))
@@ -55,7 +56,7 @@ class KylinMaster(Script):
         import params
         env.set_params(params)
         self.configure(env)
-        Execute(format("sudo -u hdfs '. {tmp_dir}/kylin_env.rc;{install_dir}/latest/bin/kylin.sh stop'"))
+        Execute(format(". {tmp_dir}/kylin_env.rc;sudo -u hdfs '{install_dir}/latest/bin/kylin.sh stop'"))
 
 
     def restart(self, env):
