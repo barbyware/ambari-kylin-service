@@ -33,7 +33,7 @@ class KylinMaster(Script):
         env.set_params(params)
         kylin_properties = InlineTemplate(params.kylin_properties)   
         File(format("{install_dir}/latest/conf/kylin.properties"), content=kylin_properties)
-	kylin_hive_conf=service_packagedir+'/configuration/kylin_hive_conf.xml'
+	kylin_hive_conf=param.service_packagedir+'/configuration/kylin_hive_conf.xml'
 	File(format("{install_dir}/latest/conf/kylin_hive_conf.xml"), content= kylin_hive_conf)
         
         File(format("{tmp_dir}/kylin_init.sh"),
