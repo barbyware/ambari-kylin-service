@@ -33,8 +33,8 @@ class KylinQuery(Script):
         find_hive_dependency=params.service_packagedir+'/configuration/find-hive-dependency.sh'
 	File(format("{install_dir}/latest/bin/find-hive-dependency.sh"), content= find_hive_dependency )
 	
-        File(format("{tmp_dir}/kylin_init.sh 	),
-             content=Template("init.sh.j2"),
+        File(format("{tmp_dir}/kylin_init.sh"),
+	     content=Template("init.sh.j2"),
              mode=0o700
              )        
         File(format("{tmp_dir}/kylin_env.rc"),
