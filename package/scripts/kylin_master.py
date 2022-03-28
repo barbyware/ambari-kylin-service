@@ -20,8 +20,8 @@ class KylinMaster(Script):
         Execute('cd ' + params.install_dir + ';rm -rf latest; ln -s apache-kylin* latest')
 	Execute('cd ' + params.install_dir + ';chown hdfs:hadoop -R apache-kylin* ')
 	Execute('cd ' + params.install_dir + '; cp guava-28.0-jre.jar latest/tomcat/lib/guava-28.0-jre.jar;cp guava-28.0-jre.jar latest/tool/guava-28.0-jre.jar' )
-	Execute('cd ' + params.install_dir + '; cd latest; mkdir /var/log/kylin;  rm -rf logs;   ln -s /var/log/kylin logs; chown -R hdfs:hadoop /var/log/kylin ')
-	Execute('cd ' + params.install_dir + '; cd latest/tomcat; mkdir /var/log/kylin/tomcat; rm -rf logs; ln -s /var/log/kylin/tomcat logs ; chown -R hdfs:hadoop /var/log/kylin ' )
+	Execute('cd ' + params.install_dir + '; cd latest; mkdir /var/log/kylin;  rm -f logs;   ln -s /var/log/kylin logs; chown -R hdfs:hadoop /var/log/kylin ')
+	Execute('cd ' + params.install_dir + '; cd latest/tomcat; mkdir /var/log/kylin/tomcat; rm -f logs; ln -s /var/log/kylin/tomcat logs ; chown -R hdfs:hadoop /var/log/kylin ' )
         
         #mkdir
         Execute('sudo -uhdfs hadoop fs -mkdir -p /kylin')
