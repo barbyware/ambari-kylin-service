@@ -35,7 +35,9 @@ class KylinMaster(Script):
         File(format("{install_dir}/latest/conf/kylin.properties"), content=kylin_properties)
 	kylin_hive_conf=params.service_packagedir+'/configuration/kylin_hive_conf.xml'
 	File(format("{install_dir}/latest/conf/kylin_hive_conf.xml"), content= kylin_hive_conf)
-        
+        find_hive_dependency=params.service_packagedir+'/configuration/find-hive-dependency.sh'
+	File(format("{install_dir}/latest/bin/kylin_hive_conf.xml"), content= find_hive_dependency )
+	
         File(format("{tmp_dir}/kylin_init.sh"),
              content=Template("init.sh.j2"),
              mode=0o700
