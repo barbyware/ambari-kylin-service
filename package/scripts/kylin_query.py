@@ -20,15 +20,20 @@ class KylinQuery(Script):
         Execute('cd ' + params.install_dir + ';rm -rf latest; ln -s apache-kylin* latest')
         Execute('cd ' + params.install_dir + ';chown hdfs:hadoop -R apache-kylin* ')
 	Execute('cd ' + params.install_dir + ';cp guava-28.0-jre.jar latest/tomcat/lib/guava-28.0-jre.jar;cp guava-28.0-jre.jar latest/tool/guava-28.0-jre.jar' )
-	             
+	Execute('cd ' + params.install_dir + '; cd latest; mkdir /var/log/kylin;  rm -rf logs;   ln -s /var/log/kylin logs; chown -R hdfs:hadoop /var/log/kylin ')
+	Execute('cd ' + params.install_dir + '; cd latest/tomcat; mkdir /var/log/kylin/tomcat; rm -rf logs; ln -s /var/log/kylin/tomcat logs ; chown -R hdfs:hadoop /var/log/kylin ' )             
 
     def configure(self, env):  
         import params
         env.set_params(params)
         kylin_properties = InlineTemplate(params.kylin_properties)   
         File(format("{install_dir}/latest/conf/kylin.properties"), content=kylin_properties)
-        
-        File(format("{tmp_dir}/kylin_init.sh"),
+        kylin_hive_conf=params.service_packagedir+'/configuration/kylin_hive_conf.xml'
+	File(format("{install_dir}/latest/conf/kylin_hive_conf.xml"), content= kylin_hive_conf)
+        find_hive_dependency=params.service_packagedir+'/configuration/find-hive-dependency.sh'
+	File(format("{install_dir}/latest/bin/find-hive-dependency.sh"), content= find_hive_dependency )
+	
+        File(format("{tmp_dir}/kylin_init.sh 	),
              content=Template("init.sh.j2"),
              mode=0o700
              )        
