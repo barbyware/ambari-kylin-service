@@ -9,7 +9,7 @@ sudo git clone https://github.com/barbyware/ambari-kylin-service.git /var/lib/am
 ```
 ## Restart Ambari
 \#sandbox  
-service ambari restart
+ambari-server restart
 
 \#non sandbox  
 sudo service ambari-server restart
